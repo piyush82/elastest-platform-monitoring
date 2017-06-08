@@ -1,0 +1,12 @@
+swagger: "2.0"
+info:
+	version: "0.0.1"
+	title: "ElasTest Monitoring API Specification"
+	description: "RESTful API specification for the ElasTest platform monitoring service."
+	termsOfService: "The author assumes no labilities from use of this document."
+	contact:
+		name: "Piyush Harsh"
+		email: "piyush.harsh@zhaw.ch"
+		url: "http://www.piyush-harsh.info/"
+	license:
+		name: "Apache Software License v 2.0"
