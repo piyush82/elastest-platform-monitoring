@@ -25,11 +25,11 @@ node('docker') {
         stage "Run image"
             myimage.run()
 
-        //stage "Publish"
-        //    echo ("Publishing")
-        //    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'elastestci-dockerhub',
-        //        usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-        //        sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
-        //        myimage.push()
-        //    }
+        stage "Publish"
+            echo ("Publishing")
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'elastestci-dockerhub',
+                usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
+                myimage.push()
+            }
 }
