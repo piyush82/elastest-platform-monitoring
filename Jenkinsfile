@@ -27,7 +27,7 @@ node('docker') {
 
         stage "Publish"
             echo ("Publishing")
-            withCredentials([usernamePassword(credentialsId: 'elastestci-dockerhub',
+            withCredentials([usernamePassword(credentialsId: 'dockerhubcred',
                                 passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                                     sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
                                     myimage.push()
