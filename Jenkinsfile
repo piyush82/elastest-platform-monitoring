@@ -15,8 +15,8 @@ node('docker') {
                 echo ("Packaging")
                 sh 'mvn package -DskipTests'
 
-            //stage "Archive atifacts"
-            //    archiveArtifacts artifacts: 'elastest-platform-monitoring.git/target/*.jar'
+            stage "Archive atifacts"
+                archiveArtifacts artifacts: 'elastest-platform-monitoring.git/target/*.jar'
 
             //stage "Build image - Package"
             //    echo ("Building")

@@ -4,14 +4,14 @@
 	
 	<!-- information of the artifact -->
 	<groupId>io.elastest</groupId>
-	<artifactId>hello-world</artifactId>
+	<artifactId>emp</artifactId>
 	<packaging>jar</packaging>
 	
 	<version>0.0.1</version>
 	
-	<name>hello-world</name>
-	<description> Examnple artifact </description>
-	<url>https://github.com/elastest/mvn-hello-world</url>
+	<name>emp</name>
+	<description> Monitoring framework for ElasTest platform </description>
+	<url>https://github.com/elastest/elastest-monitoring-platform</url>
 	
 	<!-- as agreed Public Artifacts will be under Apache Software License -->
 	<licenses>
@@ -29,18 +29,18 @@
 	
 	<developers>
 		<developer>
-			<id>elastest.io</id>
-			<name>-elastest.io Community</name>
-			<organization>Elastest.io</organization>
-			<organizationUrl>http://elastest.io</organizationUrl>
+			<id>harh@zhaw.ch</id>
+			<name>Piyush Harsh</name>
+			<organization>ZHAW</organization>
+			<organizationUrl>http://blog.zhaw.ch/icclab/</organizationUrl>
 		</developer>
 	</developers>
 	
 	<!-- Source Code Manager -->
 	<scm>
-		<url>https://github.com/elastest/mvn-hello-world</url>
-		<connection>scm:git:https://github.com/elastest/mvn-hello-world</connection>
-		<developerConnection>scm:git://git@github.com:elastest/mvn-hello-world</developerConnection>
+		<url>https://github.com/elastest/elastest-platform-monitoring</url>
+		<connection>scm:git:https://github.com/elastest/elastest-platform-monitoring</connection>
+		<developerConnection>scm:git://git@github.com:elastest/elastest-platform-monitoring</developerConnection>
 		<tag>develop</tag>
 	</scm>
 	
