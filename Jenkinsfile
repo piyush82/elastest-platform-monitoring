@@ -14,23 +14,22 @@ node('docker') {
             stage "Package"
                 echo ("Packaging")
                 sh 'mvn package -DskipTests'
-
-            stage "Archive atifacts"
-                archiveArtifacts artifacts: 'elastest-platform-monitoring.git/target/*.jar'
-
-            //stage "Build image - Package"
-            //    echo ("Building")
-            //    def myimage = docker.build '842800759158.dkr.ecr.eu-west-1.amazonaws.com/elastest/emp'
-
-            //stage "Run image"
-            //    myimage.run()
-
-            //stage "Publish"
-            //    echo ("Publishing")
-            //    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'elastestci-dockerhub',
-            //        usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-            //        sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
-            //        myimage.push()
-            //    }
         }
+        stage "Archive atifacts"
+            archiveArtifacts artifacts: 'target/*.jar'
+
+        //stage "Build image - Package"
+        //    echo ("Building")
+        //    def myimage = docker.build '842800759158.dkr.ecr.eu-west-1.amazonaws.com/elastest/emp'
+
+        //stage "Run image"
+        //    myimage.run()
+
+        //stage "Publish"
+        //    echo ("Publishing")
+        //    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'elastestci-dockerhub',
+        //        usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+        //        sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
+        //        myimage.push()
+        //    }
 }
