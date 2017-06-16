@@ -18,12 +18,12 @@ node('docker') {
         stage "Archive atifacts"
             archiveArtifacts artifacts: 'target/*.jar'
 
-        //stage "Build image - Package"
-        //    echo ("Building")
-        //    def myimage = docker.build '842800759158.dkr.ecr.eu-west-1.amazonaws.com/elastest/emp'
+        stage "Build image - Package"
+            echo ("Building")
+            def myimage = docker.build 'elastest/elastest-platform-monitoring/emp'
 
-        //stage "Run image"
-        //    myimage.run()
+        stage "Run image"
+            myimage.run()
 
         //stage "Publish"
         //    echo ("Publishing")
