@@ -8,6 +8,7 @@ node('docker') {
 
             stage "Tests"
                 echo ("Starting tests")
+		cd sentinel
                 sh 'mvn clean test'
                 step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
 
