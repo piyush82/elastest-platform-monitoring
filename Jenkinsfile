@@ -16,25 +16,25 @@ node('docker')
             stage "Package"
                 echo ("Packaging")
                 sh 'mvn package -DskipTests'
+
+            stage "Archive atifacts"
+                archiveArtifacts artifacts: 'target/*.jar'
+
+            stage "Build image - Package"
+                echo ("Building")
+                def myimage = docker.build 'elastest/elastest-platform-monitoring'
+
+            stage "Run image"
+                myimage.run()
+
+            stage "Publish"
+                echo ("Publishing")
+                //this is work arround as withDockerRegistry is not working properly
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'elastestci-dockerhub',
+                    usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
+                {
+                    sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
+                    myimage.push()
+                }
         }
-
-    stage "Archive atifacts"
-        archiveArtifacts artifacts: 'target/*.jar'
-
-    stage "Build image - Package"
-        echo ("Building")
-        def myimage = docker.build 'elastest/elastest-platform-monitoring'
-
-    stage "Run image"
-        myimage.run()
-
-    stage "Publish"
-        echo ("Publishing")
-        //this is work arround as withDockerRegistry is not working properly
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'elastestci-dockerhub',
-            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
-            {
-                sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
-                myimage.push()
-            }
 }
