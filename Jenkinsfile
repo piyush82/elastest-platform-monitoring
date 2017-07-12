@@ -30,12 +30,14 @@ node('docker')
 
     stage "Publish"
         echo ("Publishing")
-        withCredentials([usernamePassword(credentialsId: 'elastestci-dockerhub',
-                            passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')])
-                            {
-                                sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
-                                myimage.push()
-                            }
+        def myimage = docker.image('elastest/elastest-platform-monitoring')
+            //this is work arround as withDockerRegistry is not working properly
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'elastestci-dockerhub',
+                usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
+                {
+                    sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
+                    myimage.push()
+                }
 
         //withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'elastestci-dockerhub',
         //    usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
