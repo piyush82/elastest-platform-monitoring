@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  emp:
+    image: elastest/elastest-platform-monitoring
+    ports:
+      - 9000:9000
+    environment:
+      - KAFKA_ENDPOINT=localhost:9092
+      - STREAM_ENDPOINT=localhost:8086
+      - STREAM_ACCESSURL=localhost:8083
+      - ZOOKEEPER_ENDPOINT=localhost:2181
