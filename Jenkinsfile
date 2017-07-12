@@ -19,7 +19,7 @@ node('docker')
         }
 
     stage "Archive atifacts"
-        archiveArtifacts artifacts: 'sentinel/target/*.jar'
+        archiveArtifacts artifacts: 'target/*.jar'
 
     stage "Build image - Package"
         echo ("Building")
