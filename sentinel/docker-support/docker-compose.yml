@@ -25,15 +25,15 @@ services:
       - 3000:3000
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=1ccl@b2017
-  sentinel:
-    build: sentinel/
-    ports:
-      - 9000:9000
-    links:
-      - influxdb
-      - kafka
-    volumes:
-      - sentinel:/data
+#  sentinel:
+#    build: sentinel/
+#    ports:
+#      - 9000:9000
+#    links:
+#      - influxdb
+#      - kafka
+#    volumes:
+#      - sentinel:/data
 
 volumes:
   sentinel:
