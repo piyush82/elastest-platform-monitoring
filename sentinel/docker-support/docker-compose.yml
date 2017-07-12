@@ -31,6 +31,7 @@ services:
       - 9000:9000
     links:
       - influxdb
+      - kafka
     volumes:
       - sentinel:/data
 
