@@ -5,10 +5,10 @@ node('docker') {
         mycontainer.pull()
         mycontainer.inside("-u jenkins -v /var/run/docker.sock:/var/run/docker.sock:rw") {
             git 'https://github.com/elastest/elastest-platform-monitoring.git'
-
+	    cd sentinel
             stage "Tests"
                 echo ("Starting tests")
-		cd sentinel
+                pwd
                 sh 'mvn clean test'
                 step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
 
