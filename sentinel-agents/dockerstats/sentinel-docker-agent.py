@@ -26,6 +26,7 @@ from kafka import KafkaProducer
 import time
 import socket
 import jsonpickle
+import sys
 
 config = configparser.RawConfigParser()
 config.read("sentinel-agent.conf")
@@ -81,77 +82,88 @@ if __name__ == '__main__':
     client = docker.DockerClient(base_url)
     container_cache = {}
     while True:
-        container_collection = client.containers.list()
-        msg_to_send = ""
-        element_list = []
-        for container in container_collection:
-            container_data = {}
-            sample_list = []
-            container_data["id"] = container.id
-            container_data["name"] = container.name
-            stat = container.stats(decode=True, stream=False)
-            # extracting relevant stats
-            data = SentinelElement()
-            data.key = "networks_eth0_rx_bytes"
-            if (container.id + "_" + "networks-eth0-rx_bytes") in container_cache and \
-                            container_cache[container.id + "_" + "networks-eth0-rx_bytes"] > 0:
-                data.value = stat["networks"]["eth0"]["rx_bytes"] - \
-                             container_cache[container.id + "_" + "networks-eth0-rx_bytes"]
-                container_cache[container.id + "_" + "networks-eth0-rx_bytes"] = stat["networks"]["eth0"]["rx_bytes"]
-                if data.value < 0:
+        try:
+            container_collection = client.containers.list()
+            msg_to_send = ""
+            element_list = []
+            for container in container_collection:
+                container_data = {}
+                sample_list = []
+                container_data["id"] = container.id
+                container_data["name"] = container.name
+                stat = container.stats(decode=True, stream=False)
+                # extracting relevant stats
+                data = SentinelElement()
+                data.key = "networks_eth0_rx_bytes"
+                if (container.id + "_" + "networks-eth0-rx_bytes") in container_cache and \
+                                container_cache[container.id + "_" + "networks-eth0-rx_bytes"] > 0:
+                    data.value = stat["networks"]["eth0"]["rx_bytes"] - \
+                                 container_cache[container.id + "_" + "networks-eth0-rx_bytes"]
+                    container_cache[container.id + "_" + "networks-eth0-rx_bytes"] = \
+                        stat["networks"]["eth0"]["rx_bytes"]
+                    if data.value < 0:
+                        data.value = 0
+                else:
+                    container_cache[container.id + "_" + "networks-eth0-rx_bytes"] = \
+                        stat["networks"]["eth0"]["rx_bytes"]
                     data.value = 0
-            else:
-                container_cache[container.id + "_" + "networks-eth0-rx_bytes"] = stat["networks"]["eth0"]["rx_bytes"]
-                data.value = 0
-            data.type = "long"
-            sample_list.append(data)
+                data.type = "long"
+                sample_list.append(data)
 
-            data = SentinelElement()
-            data.key = "networks_eth0_tx_bytes"
-            if (container.id + "_" + "networks-eth0-tx_bytes") in container_cache and \
-                            container_cache[container.id + "_" + "networks-eth0-tx_bytes"] > 0:
-                data.value = stat["networks"]["eth0"]["tx_bytes"] - \
-                             container_cache[container.id + "_" + "networks-eth0-tx_bytes"]
-                container_cache[container.id + "_" + "networks-eth0-tx_bytes"] = stat["networks"]["eth0"]["tx_bytes"]
-                if data.value < 0:
+                data = SentinelElement()
+                data.key = "networks_eth0_tx_bytes"
+                if (container.id + "_" + "networks-eth0-tx_bytes") in container_cache and \
+                                container_cache[container.id + "_" + "networks-eth0-tx_bytes"] > 0:
+                    data.value = stat["networks"]["eth0"]["tx_bytes"] - \
+                                 container_cache[container.id + "_" + "networks-eth0-tx_bytes"]
+                    container_cache[container.id + "_" + "networks-eth0-tx_bytes"] = \
+                        stat["networks"]["eth0"]["tx_bytes"]
+                    if data.value < 0:
+                        data.value = 0
+                else:
+                    container_cache[container.id + "_" + "networks-eth0-tx_bytes"] = \
+                        stat["networks"]["eth0"]["tx_bytes"]
                     data.value = 0
-            else:
-                container_cache[container.id + "_" + "networks-eth0-tx_bytes"] = stat["networks"]["eth0"]["tx_bytes"]
-                data.value = 0
-            data.type = "long"
-            sample_list.append(data)
+                data.type = "long"
+                sample_list.append(data)
 
-            data = SentinelElement()
-            data.key = "memory_stats_usage"
-            data.value = stat["memory_stats"]["usage"]
-            data.type = "long"
-            sample_list.append(data)
+                data = SentinelElement()
+                data.key = "memory_stats_usage"
+                data.value = stat["memory_stats"]["usage"]
+                data.type = "long"
+                sample_list.append(data)
 
-            data = SentinelElement()
-            data.key = "cpu_usage_total"
-            if (container.id + "_" + "cpu_stats-cpu_usage-total_usage") in container_cache and \
-                            container_cache[container.id + "_" + "cpu_stats-cpu_usage-total_usage"] > 0:
-                data.value = stat["cpu_stats"]["cpu_usage"]["total_usage"] - \
-                             container_cache[container.id + "_" + "cpu_stats-cpu_usage-total_usage"]
-                container_cache[container.id + "_" + "cpu_stats-cpu_usage-total_usage"] = \
-                    stat["cpu_stats"]["cpu_usage"]["total_usage"]
-                if data.value < 0:
+                data = SentinelElement()
+                data.key = "cpu_usage_total"
+                if (container.id + "_" + "cpu_stats-cpu_usage-total_usage") in container_cache and \
+                                container_cache[container.id + "_" + "cpu_stats-cpu_usage-total_usage"] > 0:
+                    data.value = stat["cpu_stats"]["cpu_usage"]["total_usage"] - \
+                                 container_cache[container.id + "_" + "cpu_stats-cpu_usage-total_usage"]
+                    container_cache[container.id + "_" + "cpu_stats-cpu_usage-total_usage"] = \
+                        stat["cpu_stats"]["cpu_usage"]["total_usage"]
+                    if data.value < 0:
+                        data.value = 0
+                else:
+                    container_cache[container.id + "_" + "cpu_stats-cpu_usage-total_usage"] = \
+                        stat["cpu_stats"]["cpu_usage"]["total_usage"]
                     data.value = 0
-            else:
-                container_cache[container.id + "_" + "cpu_stats-cpu_usage-total_usage"] = \
-                    stat["cpu_stats"]["cpu_usage"]["total_usage"]
-                data.value = 0
-            data.type = "long"
-            sample_list.append(data)
+                data.type = "long"
+                sample_list.append(data)
 
-            container_data["metrics"] = sample_list
-            element_list.append(container_data)
-        msg_dict = {}
-        msg_dict["host"] = hostname
-        msg_dict["unixtime"] = str(time.time()) # unix time in seconds
-        msg_dict["agent"] = "sentinel-docker-agent"
-        msg_dict["values"] = element_list
-        msg_to_send = jsonpickle.encode(msg_dict)
-        # print(msg_to_send)
-        send_msg(msg_to_send)
-        time.sleep(int(get_element_value("agent", "period")))
+                container_data["metrics"] = sample_list
+                element_list.append(container_data)
+            msg_dict = {}
+            msg_dict["host"] = hostname
+            msg_dict["unixtime"] = str(time.time())  # unix time in seconds
+            msg_dict["agent"] = "sentinel-docker-agent"
+            msg_dict["values"] = element_list
+            msg_to_send = jsonpickle.encode(msg_dict)
+            #  print(msg_to_send)
+            send_msg(msg_to_send)
+        except:
+            print("Unexpected error:", sys.exc_info()[0])
+
+        try:
+            time.sleep(int(get_element_value("agent", "period")))
+        except KeyboardInterrupt:
+            print("Terminating agent...")
