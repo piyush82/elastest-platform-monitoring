@@ -3,10 +3,24 @@
 Copyright © 2017-2019 Zuercher Hochschule fuer Angewandte Wissenschaften. Licensed under [Apache 2.0 License].
 # elastest-platform-monitoring (emp)
 Monitoring service for monitoring ElasTest platform
-
 [![License badge](https://img.shields.io/badge/license-Apache2-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
+# What is ElasTest
 
+This repository is part of [ElasTest], which is an open source elastic platform
+aimed to simplify end-to-end testing. ElasTest platform is based on three
+principles: i) Test orchestration: Combining intelligently testing units for
+creating a more complete test suite following the “divide and conquer” principle.
+ii) Instrumentation and monitoring: Customizing the SuT (Subject under Test)
+infrastructure so that it reproduces real-world operational behavior and allowing
+to gather relevant information during testing. iii) Test recommendation: Using machine
+learning and cognitive computing for recommending testing actions and providing
+testers with friendly interactive facilities for decision taking.
+
+# Documentation
+
+The [ElasTest] project provides detailed documentation including tutorials,
+installation and development guide.
 
 # Source
 Source code for other ElasTest projects can be found in the [GitHub ElasTest
@@ -53,6 +67,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
+# Support
+The ElasTest project provides community support through the [ElasTest Public
+Mailing List] and through [StackOverflow] using the tag *elastest*.
+
+
+<p align="center">
+  <img src="http://elastest.io/images/logos_elastest/ue_logo-small.png"><br>
+  Funded by the European Union
+</p>
 
 [Apache 2.0 License]: http://www.apache.org/licenses/LICENSE-2.0
 [ElasTest]: http://elastest.io/
