@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Using Docker &mdash; sentinel 0.1 documentation</title>
+  <title>Installation &mdash; sentinel 0.1 documentation</title>
   
 
   
@@ -91,7 +91,10 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Docker</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-docker-compose">Using docker-compose</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -136,7 +139,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Using Docker</li>
+      <li>Installation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -155,10 +158,34 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="using-docker">
-<span id="using-docker"></span><h1>Using Docker<a class="headerlink" href="#using-docker" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="installation">
+<span id="installation"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Sentinel can be easily installed using docker. The docker compose file is provided for convenience.</p>
+<div class="section" id="using-docker-compose">
+<span id="using-docker-compose"></span><h2>Using docker-compose<a class="headerlink" href="#using-docker-compose" title="Permalink to this headline">¶</a></h2>
+<p>Change into 'docker-support' subfolder under the root folder of the git repo clone. Then execute docker-compose as shown below:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">up</span>
 </pre></div>
+</div>
+<p>This command brings all the dependencies needed for sentinel:</p>
+<ul class="simple">
+<li>Grafana - grafana/grafana:4.3.2</li>
+<li>InfluxDB - influxdb:1.2.4-alpine</li>
+<li>Java8 - rolvlad/alpine-oraclejdk8</li>
+<li>Kafka - spotify/kafka:latest</li>
+</ul>
+<p>The sentinel framework allows certain parameters to be set via environment variables. An example environment block is shown next:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>      <span class="o">-</span> <span class="n">STREAM_ADMINUSER</span><span class="o">=</span><span class="n">root</span>
+      <span class="o">-</span> <span class="n">STREAM_ADMINPASS</span><span class="o">=</span><span class="n">pass1234</span>
+      <span class="o">-</span> <span class="n">STREAM_DBENDPOINT</span><span class="o">=</span><span class="n">influxdb</span><span class="p">:</span><span class="mi">8086</span>
+      <span class="o">-</span> <span class="n">STREAM_ACCESSURL</span><span class="o">=</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8083</span>
+      <span class="o">-</span> <span class="n">STREAM_DBTYPE</span><span class="o">=</span><span class="n">influxdb</span>
+      <span class="o">-</span> <span class="n">ZOOKEEPER_ENDPOINT</span><span class="o">=</span><span class="n">kafka</span><span class="p">:</span><span class="mi">2181</span>
+      <span class="o">-</span> <span class="n">KAFKA_ENDPOINT</span><span class="o">=</span><span class="n">kafka</span><span class="p">:</span><span class="mi">9092</span>
+      <span class="o">-</span> <span class="n">TOPIC_CHECK_INTERVAL</span><span class="o">=</span><span class="mi">30000</span>
+</pre></div>
+</div>
+<p>Currently, sentinel works only with InfluxDB time-series backend. Support for emerging alternatives such as Timescaledb is planned and will be added very soon.</p>
 </div>
 </div>
 
