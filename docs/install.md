@@ -39,3 +39,13 @@ Currently, sentinel works only with InfluxDB time-series backend. Support for em
 * ZOOKEEPER_ENDPOINT - the endpoint of the Zookeeper service
 * KAFKA_ENDPOINT - the endpoint where Kafka cluster is reachable by sentinel
 * TOPIC_CHECK_INTERVAL - defined in milliseconds, denotes the time interval between Kafka Topic query by topic manager in Sentinel.
+
+### Configuring Kafka container
+The kafka container allows certain parameters to be set via environment block.
+```
+      - ADVERTISED_PORT=9092
+      - ADVERTISED_HOST=kafka
+```
+Care must be taken in defining 'ADVERTISED_HOST' value. The best solution is to provide a FQDN or a public IP if Kafka is to be accessed by external processes which will be the most common use-case of sentinel. Setting an incorrect value of this parameter may leave your kafka cluster unreachable for external services, or even sentinel process running in a container.
+
+Our recommendation is to setup kafka cluster is a separate node entirely, and configure 'KAFKA_ENDPOINT' parameter for sentinel as a FQDN string.
