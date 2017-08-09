@@ -9,7 +9,7 @@ Welcome to sentinel's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   install.md
 
 
 Indices and tables
