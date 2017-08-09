@@ -49,3 +49,16 @@ The kafka container allows certain parameters to be set via environment block.
 Care must be taken in defining 'ADVERTISED_HOST' value. The best solution is to provide a FQDN or a public IP if Kafka is to be accessed by external processes which will be the most common use-case of sentinel. Setting an incorrect value of this parameter may leave your kafka cluster unreachable for external services, or even sentinel process running in a container.
 
 Our recommendation is to setup kafka cluster is a separate node entirely, and configure 'KAFKA_ENDPOINT' parameter for sentinel as a FQDN string.
+
+## Install from source
+Sentinel framework is written in Java and requires Oracle Java 8 for proper working. OpenJDK 8 should also work but the codebase has not been tested with openJDK 8.
+
+### Requirements
+* Maven 3.0.5 and higher
+* Oracle Java 8
+
+### Packaging
+```
+mvn pakage
+```
+The self-contained jar file is created under ./target/ folder. 
