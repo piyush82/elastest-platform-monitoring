@@ -18,6 +18,8 @@
 #
 import os
 import sys
+import recommonmark.parser
+
 # sys.path.insert(0, os.path.abspath('.'))
 
 
