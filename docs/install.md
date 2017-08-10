@@ -46,9 +46,9 @@ The kafka container allows certain parameters to be set via environment block.
       - ADVERTISED_PORT=9092
       - ADVERTISED_HOST=kafka
 ```
-Care must be taken in defining 'ADVERTISED_HOST' value. The best solution is to provide a FQDN or a public IP if Kafka is to be accessed by external processes which will be the most common use-case of sentinel. Setting an incorrect value of this parameter may leave your kafka cluster unreachable for external services, or even sentinel process running in a container.
+Care must be taken in defining **ADVERTISED_HOST** value. The best solution is to provide a FQDN or a public IP if Kafka is to be accessed by external processes which will be the most common use-case of sentinel. Setting an incorrect value of this parameter may leave your kafka cluster unreachable for external services, or even sentinel process running in a container.
 
-Our recommendation is to setup kafka cluster is a separate node entirely, and configure 'KAFKA_ENDPOINT' parameter for sentinel as a FQDN string.
+Our recommendation is to setup kafka cluster is a separate node entirely, and configure **KAFKA_ENDPOINT** parameter for sentinel as a FQDN string.
 
 ## Install from source
 Sentinel framework is written in Java and requires Oracle Java 8 for proper working. OpenJDK 8 should also work but the codebase has not been tested with openJDK 8.
@@ -59,6 +59,56 @@ Sentinel framework is written in Java and requires Oracle Java 8 for proper work
 
 ### Packaging
 ```
-mvn pakage
+mvn clean package
 ```
-The self-contained jar file is created under ./target/ folder. 
+The self-contained jar file is created under ./target/ folder. Unless the pom file was changed, the self contained jar file is named **sentinel-0.1.jar**
+
+To execute, simply run the jar as follows -
+```
+$ java -jar /path/to/jar/sentinel-0.1.jar
+```
+The above assumes that the **application.properties** file is in the classpath, or in the same folder as the jar file. In case the **application.properties** file is kept some other location, please use the following command instead -
+```
+$ java -jar /path/to/jar/sentinel-0.1.jar --spring.config.location=/path/to/config/application.properties
+```
+
+### Configuration options
+All application configuration is provided via **application.properties** file. A sample file content is listed below.
+```
+spring.thymeleaf.mode=LEGACYHTML5
+logging.level.org.springframework.web=WARN
+logging.level.org.hibernate=ERROR
+logging.level.org.apache.kafka=WARN
+logging.level.org.jooq=WARN
+spring.mvc.throw-exception-if-no-handler-found=true
+logging.file=sentinel.log
+server.port=9000
+server.ssl.enabled=true
+server.ssl.key-alias=sentinel
+server.ssl.key-store=keystore.p12
+server.ssl.key-store-type=PKCS12
+server.ssl.key-store-password=pass1234
+server.ssl.key-password=pass1234
+displayexceptions=true
+sentinel.db.type=sqlite
+sentinel.db.endpoint=sentinel.db
+#kafka.endpoint=kafka.demonstrator.info:9092
+kafka.endpoint=localhost:9092
+kafka.key.serializer=StringSerializer
+kafka.value.serializer=StringSerializer
+#zookeeper.endpoint=kafka.demonstrator.info:2181
+zookeeper.endpoint=localhost:2181
+topic.check.interval=30000
+# stream.db.type=postgres
+# stream.db.endpoint=localhost:5432
+# stream.db.adminuser=postgres
+# stream.db.adminpass=postgres
+stream.dbtype=influxdb
+stream.dbendpoint=localhost:8086
+stream.accessurl=localhost:8083
+stream.adminuser=root
+stream.adminpass=1ccl@b2017
+admin.token=eedsR2v5n4uh7Gjy
+series.format.cache.size=100
+published.api.version=v1
+```
