@@ -8,6 +8,26 @@ Currently three sentinel agents are available and more are being planned and wil
 In addition, it is very easy to use inline code to directly send your logs into sentinel. All agents are written in **Python3** and need **pip3** to install all dependencies.
 
 ## common configuration
+The agent configuration file is called **sentinel-agent.conf**. Depending on the type of agent you are executing / configuring, the configuration sections may be different. Here we present the common sections present in every configuration file:
+```
+[kafka-endpoint]
+endpoint = kafka-endpoint:9092
+keySerializer = StringSerializer
+valueSerializer = StringSerializer
+```
+
+* endpoint - set this to the end point of your kafka cluster associated with sentinel framework
+
+```
+[sentinel]
+topic = some-topic-name
+seriesName = your-series-name
+```
+
+* topic - the kafka topic-name that was allocated to sentinel user for a given monitoring space in sentinel
+* seriesname - the series that was created within the monitoring space
+
+Agent specific configuration parameters are covered in each agents subsection next.
 
 ## docker stats agent
 The agent is located in the *sentinel-agents/dockerstats/* subdirectory in the downloaded git repository. To install all dependencies please use -
