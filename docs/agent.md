@@ -27,7 +27,7 @@ seriesName = your-series-name
 * topic - the kafka topic-name that was allocated to sentinel user for a given monitoring space in sentinel
 * seriesname - the series that was created within the monitoring space
 
-Agent specific configuration parameters are covered in each agents subsection next.
+Unless one is writing their own sentinel agent, there is probably no need to change any other configuration parameters under **[kafka-endpoint]** or **[sentinel]** sections. Agent specific configuration parameters are covered in each agents subsection next.
 
 ## docker stats agent
 The agent is located in the *sentinel-agents/dockerstats/* subdirectory in the downloaded git repository. To install all dependencies please use -
