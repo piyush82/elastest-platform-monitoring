@@ -22,6 +22,8 @@ testers with friendly interactive facilities for decision taking.
 The [ElasTest] project provides detailed documentation including tutorials,
 installation and development guide.
 
+For installation and api-usage documentation, please check out http://sentinel-monitoring.readthedocs.io/en/latest/index.html
+
 # Source
 Source code for other ElasTest projects can be found in the [GitHub ElasTest
 Group].
