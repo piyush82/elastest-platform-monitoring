@@ -107,18 +107,18 @@ if __name__ == '__main__':
                         aggregated_values[key] += element + " "
             unix_timestamp = datetime.strptime(str.rstrip(aggregated_values["unixtime"]), '%Y-%m-%d %H:%M:%S')
             msg_to_send = ""
-            if "unixtime:ms" in get_element_value("target-file", "seriesPattern"):
+            if "unixtime:ms" in get_element_value("sentinel", "seriesPattern"):
                 msg_to_send += "unixtime:" + str(unix_timestamp.timestamp() * 1000)
-            elif "unixtime:s" in get_element_value("target-file", "seriesPattern"):
+            elif "unixtime:s" in get_element_value("sentinel", "seriesPattern"):
                 msg_to_send += "unixtime:" + str(unix_timestamp.timestamp())
-            elif "unixtime:ns" in get_element_value("target-file", "seriesPattern"):
+            elif "unixtime:ns" in get_element_value("sentinel", "seriesPattern"):
                 msg_to_send += "unixtime:" + str(unix_timestamp.timestamp() * 1000000)
-            elif "unixtime:us" in get_element_value("target-file", "seriesPattern"):
+            elif "unixtime:us" in get_element_value("sentinel", "seriesPattern"):
                 msg_to_send += "unixtime:" + str(unix_timestamp.timestamp() * 1000000000)
             for key in map_keys:
                 if key == "unixtime":
                     continue
                 msg_to_send += " " + key + ":" + str(aggregated_values[key]).strip().replace(" ", "_").replace(":", "@")
-            send_msg(get_element_value("target-file", "seriesName"), msg_to_send)
+            send_msg(get_element_value("sentinel", "seriesName"), msg_to_send)
             # print(aggregated_values)
         time.sleep(1)
