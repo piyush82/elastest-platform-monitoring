@@ -5,6 +5,7 @@
 
 Welcome to sentinel's documentation!
 ====================================
+Sentinel is a framework for monitoring anything anytime. It does not differentiate between logs or metrics, everything is first class element within sentinel. The framework developers provide sentinel agents to cover most common use cases, and a lot many others are being planned for future release. 
 
 .. toctree::
    :maxdepth: 2
