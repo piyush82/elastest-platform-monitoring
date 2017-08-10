@@ -131,6 +131,7 @@ public class AppConfiguration {
 
     public static String getKafkaURL()
     {
+        logger.info("returning kafka endpoint as: " + KafkaURL);
         return KafkaURL;
     }
 

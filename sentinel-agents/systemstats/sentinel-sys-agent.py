@@ -59,7 +59,7 @@ def send_msg(msg):
 
 if __name__ == '__main__':
     while True:
-        msg_to_send = "";
+        msg_to_send = ""
         cpu_data = psutil.cpu_times()
         cpu_percent = psutil.cpu_percent(interval=None)
         ram_data = psutil.virtual_memory()

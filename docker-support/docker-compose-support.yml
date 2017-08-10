@@ -8,7 +8,6 @@ services:
       - 9092:9092
     environment:
       - ADVERTISED_PORT=9092
-      - ADVERTISED_HOST=kafka
   influxdb:
     image: influxdb:1.2.4-alpine
     ports:
@@ -25,23 +24,3 @@ services:
       - 3000:3000
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=1ccl@b2017
-  sentinel:
-    build: sentinel/
-    links:
-      - influxdb
-      - kafka
-    ports:
-      - 9000:9000
-    environment:
-      - STREAM_ADMINUSER=root
-      - STREAM_ADMINPASS=pass1234
-      - STREAM_DBENDPOINT=influxdb:8086
-      - STREAM_ACCESSURL=localhost:8083
-      - STREAM_DBTYPE=influxdb
-      - ZOOKEEPER_ENDPOINT=kafka:2181
-      - KAFKA_ENDPOINT=kafka:9092
-      - TOPIC_CHECK_INTERVAL=30000
-    volumes:
-      - sentinel:/data
-volumes:
-  sentinel:

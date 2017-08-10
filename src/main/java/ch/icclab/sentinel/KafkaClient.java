@@ -52,7 +52,7 @@ public class KafkaClient
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);
         topics = consumer.listTopics();
         Set<String> keys = topics.keySet();
-
+        logger.info("ListTopics: found " + keys.size() + "topic(s).");
         return keys.toArray(new String[keys.size()]);
     }
 

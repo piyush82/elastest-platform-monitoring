@@ -233,10 +233,23 @@ public class InfluxDBClient
                             }
                             return true;
                         }
+                        if(agentType.equalsIgnoreCase("sentinel-internal-log-agent"))
+                        {
+                            builder = Point.measurement(key);
+                            builder.time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+                            for (Object jsonKey:json.keySet())
+                            {
+                                if(((String)(jsonKey)).equalsIgnoreCase("agent")) continue;
+                                builder.addField((String)(jsonKey), (String)json.get((String)(jsonKey)));
+                            }
+                            Point point1 = builder.build();
+                            influxDB.write(topic, "autogen", point1);
+                            return true;
+                        }
                     }
                     catch (Exception ex)
                     {
-                        logger.warn("Exception caught in parssing json: " + ex.getLocalizedMessage());
+                        logger.warn("Exception caught in parsing json: " + ex.getLocalizedMessage());
                         return false;
                     }
                 }

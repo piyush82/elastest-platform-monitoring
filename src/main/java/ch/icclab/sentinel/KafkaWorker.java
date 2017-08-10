@@ -89,6 +89,7 @@ public class KafkaWorker implements Runnable {
         Properties props = new Properties();
 
         props.put("bootstrap.servers", AppConfiguration.getKafkaURL());
+        logger.info("Inside: kafkaWorker:: Setting bootstrap server for kafka to: " + AppConfiguration.getKafkaURL());
         props.put("group.id", "group1");
         props.put("enable.auto.commit", "true");
         props.put("auto.commit.interval.ms", "1000");
@@ -97,17 +98,22 @@ public class KafkaWorker implements Runnable {
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);
-        consumer.subscribe(topics);
+        try {
+            consumer.subscribe(topics);
 
-        while(!isInterrupted)
-        {
-            ConsumerRecords<String, String> records = consumer.poll(100);
-            for (ConsumerRecord<String, String> record : records) {
-                Runnable dbWorker = new PersistenceWorker(record.topic(), record.key(), record.offset(), record.value());
-                Application.PersistenceWorkerPool.execute(dbWorker);
-                // print the offset,key and value for the consumer records.
-                //System.out.printf("topic = %s, offset = %d, key = %s, value = %s\n", record.topic(), record.offset(), record.key(), record.value());
+            while (!isInterrupted) {
+                ConsumerRecords<String, String> records = consumer.poll(100);
+                for (ConsumerRecord<String, String> record : records) {
+                    Runnable dbWorker = new PersistenceWorker(record.topic(), record.key(), record.offset(), record.value());
+                    Application.PersistenceWorkerPool.execute(dbWorker);
+                    // print the offset,key and value for the consumer records.
+                    //System.out.printf("topic = %s, offset = %d, key = %s, value = %s\n", record.topic(), record.offset(), record.key(), record.value());
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            logger.warn("Caught Exception inside kafka worker: " + ex.getLocalizedMessage());
         }
 
         logger.info(Thread.currentThread().getName() + " quitting now. Was subscribed with " + (topics.size() - 1) + " topics.");
