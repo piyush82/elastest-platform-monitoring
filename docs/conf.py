@@ -53,8 +53,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'sentinel'
-copyright = u'2017, Piyush Harsh'
-author = u'Piyush Harsh'
+copyright = u'2017, ICCLab@ZHAW-InIT'
+author = u'Piyush Harsh - http://piyush-harsh.info/'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

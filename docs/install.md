@@ -111,11 +111,13 @@ series.format.cache.size=100
 published.api.version=v1
 ```
 Many of the entries in the **application.properties** file are self-explanatory. A few non-obvious ones are explained next -
+* server.port - on what port number sentinel APIs are accessible
 * displayexceptions - set this to **true** if you want to include exceptions full trace in the log outputs
 * sentinel.db.type - currently only *sqlite* is supported
 * sentinel.db.endpoint - relative or absolute path of the DB file
 * topic.check.interval - value in milliseconds indicating the gap between checking list of monitoring spaces for subscription
 * stream.dbtype - the time series DB where the monitor stream will be stored, currently only *influxdb* is supported
+* stream.accessurl - the url /IP where the InfluxDB admin UI is accessible to the user (if enabled), this should be an externally accessible FQDN ideally
 * stream.adminuser - the name of the admin account in the stream DB (here influxdb), this value is meaningful only when *authentication* and *authorization* is enabled in InfluxDB, otherwise the values are not enforced by the DB
 * admin.token - this is the master token using which a new user account can be created within sentinel, this value should be accessible only to the administrators of the system, or within the API engine in case you wish to support self registration by general public.
 * series.format.cache.size - number of series signatures to be maintained in the in-memory cache of sentinel
