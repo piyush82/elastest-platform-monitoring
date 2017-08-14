@@ -1,4 +1,6 @@
-# Using sentinel APIs
+===================
+Using sentinel APIs
+===================
 
 Sentinel monitoring exposes a rich set of APIs for user and space management. The current release of sentinel has APIs supporting bare-minimal features and as the features set get richer, so will be the APIs. Below are the list of APIs currently offered by the framework -
 
