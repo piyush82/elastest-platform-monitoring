@@ -16,10 +16,13 @@ Sentinel monitoring exposes a rich set of APIs for user and space management. Th
 `Series`: A series in Sentinel is a stream of metrics coming from the same source.
 
 ## API return codes at a glance
-<!--table-->
+
++---------------+-------+---------------+--------------+
 | API endpoint  | Verb  | Return codes  | Comments     |
-| ------------- |------ |-------------- | ------------ |
++===============+=======+===============+==============+
 | /v1/api/      | GET   | 200           | OK           |
++---------------+-------+---------------+--------------+
 |               |       | 500           | Service down |
++---------------+-------+---------------+--------------+
 | /v1/api/user/ | POST  | 201           | Created      |
-<!--endtable-->
++---------------+-------+---------------+--------------+
