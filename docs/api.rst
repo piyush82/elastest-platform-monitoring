@@ -14,9 +14,9 @@ Sentinel monitoring exposes a rich set of APIs for user and space management. Th
 Key concepts
 ============
 
-`Space`: Think of it as a collection of metrics belonging to different streams but somehow belonging to the same scope, application or service. A space could be allocated to metrics of smaller services making up a larger application or service.
+**Space**: Think of it as a collection of metrics belonging to different streams but somehow belonging to the same scope, application or service. A space could be allocated to metrics of smaller services making up a larger application or service.
 
-`Series`: A series in Sentinel is a stream of metrics coming from the same source.
+**Series**: A series in Sentinel is a stream of metrics coming from the same source.
 
 API return codes at a glance
 ============================
@@ -70,4 +70,20 @@ API return codes at a glance
 
 Header fields at a glance
 =========================
++-----------------+--------------------------------+
+| field key       | value / interpretations        |
++=================+================================+
+| Content-Type    | application/json is typical    |
++-----------------+--------------------------------+
+| x-auth-token    | admin user master token        |
++-----------------+--------------------------------+
+| x-auth-password | password associated with user  |
++-----------------+--------------------------------+
+| x-auth-login    | username or userid             |
++-----------------+--------------------------------+
+| x-auth-apikey   | api key associated with user   |
++-----------------+--------------------------------+
 
+APIs in details
+===============
+Now that we have all the basic building buildings in place, lets explore each API endpoint in more details.
