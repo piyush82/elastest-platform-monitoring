@@ -11,14 +11,15 @@ Sentinel monitoring exposes a rich set of APIs for user and space management. Th
 * /v1/api/key/ - API to retrieve user's API key if forgotten
 * /v1/api/endpoint - API to retrieve Sentinel's data interface parameters
 
-## Key concepts
+Key concepts
+============
 
 `Space`: Think of it as a collection of metrics belonging to different streams but somehow belonging to the same scope, application or service. A space could be allocated to metrics of smaller services making up a larger application or service.
 
 `Series`: A series in Sentinel is a stream of metrics coming from the same source.
 
-## API return codes at a glance
-
+API return codes at a glance
+============================
 +---------------+-------+---------------+--------------+
 | API endpoint  | Verb  | Return codes  | Comments     |
 +===============+=======+===============+==============+
