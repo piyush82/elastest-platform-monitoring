@@ -12,7 +12,7 @@ Sentinel is a framework for monitoring anything anytime. It does not differentia
    :caption: Contents:
    
    install.md
-   api.md
+   api.rst
    agent.md
 
 
