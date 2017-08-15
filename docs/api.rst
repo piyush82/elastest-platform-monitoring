@@ -86,10 +86,12 @@ Header fields at a glance
 
 APIs in details
 ===============
-Now that we have all the basic building buildings in place, lets explore each API endpoint in more details.
+Now that we have all the basic building buildings in place, lets explore each API endpoint in more details. In the following subsections lets assume that the sentinel API service is available at https://localhost:9000/. Also API example will be provided as a valid cURL command.
 
 /v1/api/ GET
 ------------
+::
+	curl -X GET https://localhost:9000/v1/api/
 
 /v1/api/user/ POST
 ------------------
