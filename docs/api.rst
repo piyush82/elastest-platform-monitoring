@@ -92,7 +92,6 @@ Now that we have all the basic building buildings in place, lets explore each AP
 ------------
 ::
 
-  $ cat myscript.sh
   curl -X GET https://localhost:9000/v1/api/
 
 /v1/api/user/ POST
