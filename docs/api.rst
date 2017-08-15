@@ -90,8 +90,10 @@ Now that we have all the basic building buildings in place, lets explore each AP
 
 /v1/api/ GET
 ------------
-.. code-block:: bash
-	curl -X GET https://localhost:9000/v1/api/
+::
+
+  $ cat myscript.sh
+  curl -X GET https://localhost:9000/v1/api/
 
 /v1/api/user/ POST
 ------------------
