@@ -2,7 +2,7 @@ node('docker')
 {
     stage "Container Prep"
         echo("The node is up")
-        def mycontainer = docker.image('elastest/docker-siblings:latest')
+        def mycontainer = docker.image('elastest/ci-docker-siblings:latest')
         mycontainer.pull()
         mycontainer.inside("-u jenkins -v /var/run/docker.sock:/var/run/docker.sock:rw")
         {
