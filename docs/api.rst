@@ -119,6 +119,7 @@ The response is similar to one shown below -
         "contentType": "application/json"
     }
   ]
+The output above is representative, and the actual API supported by sentinel varied during the time of writing of this document.
 
 /v1/api/user/ POST
 ------------------
