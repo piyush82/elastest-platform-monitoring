@@ -118,14 +118,15 @@ Now that we have all the basic building buildings in place, lets explore each AP
 
   curl -X POST https://localhost:9000/v1/api/series/ --header "Content-Type: application/json"
   --header "x-auth-login: username" --header "x-auth-apikey: some-api-key"
-  -d '{"name":"series-name", "spaceName":"parent-space-name", "msgSignature":"signature pattern"}'
+  -d '{"name":"series-name", "spaceName":"parent-space-name", "msgSignature":"msg-signature"}'
 
 
 /v1/api/key/{id} GET
 --------------------
 ::
 
-  curl -X GET https://localhost:9000/v1/api/key/{username} --header "Content-Type: application/json"
+  curl -X GET https://localhost:9000/v1/api/key/{username} 
+  --header "Content-Type: application/json"
   --header "x-auth-password: some-password"
 
 /v1/api/endpoint GET
