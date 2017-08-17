@@ -98,16 +98,28 @@ Now that we have all the basic building buildings in place, lets explore each AP
 ------------------
 ::
 
-  curl -X POST https://localhost:9000/v1/api/user/ --header "Content-type: application/json" 
+  curl -X POST https://localhost:9000/v1/api/user/ --header "Content-Type: application/json" 
   --header "x-auth-token: <admin-token>" -d '{"login":"username", "password":"some-password"}'
 
 
 
 /v1/api/space/ POST
 -------------------
+::
+
+  curl -X POST https://localhost:9000/v1/api/space/ --header "Content-Type: application/json"
+  --header "x-auth-login: username" --header "x-auth-apikey: some-api-key"
+  -d '{"name":"space-name"}'
+
 
 /v1/api/series/ POST
 --------------------
+::
+
+  curl -X POST https://localhost:9000/v1/api/series/ --header "Content-Type: application/json"
+  --header "x-auth-login: username" --header "x-auth-apikey: some-api-key"
+  -d '{"name":"series-name", "spaceName":"parent-space-name", "msgSignature":"signature pattern for the data elements"}'
+
 
 /v1/api/key/{id} GET
 --------------------
