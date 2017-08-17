@@ -90,9 +90,35 @@ Now that we have all the basic building buildings in place, lets explore each AP
 
 /v1/api/ GET
 ------------
+This API allows a quick check on the health status, if the service is alive a 200 status code is returned along with a list of supported API endpoints.
+
 ::
 
   curl -X GET https://localhost:9000/v1/api/
+
+The response is similar to one shown below -
+::
+
+  [
+    {
+        "endpoint": "/api/space/",
+        "method": "GET",
+        "description": "list of monitored spaces",
+        "contentType": "application/json"
+    },
+    {
+        "endpoint": "/api/space/",
+        "method": "POST",
+        "description": "register / create a new monitored space",
+        "contentType": "application/json"
+    },
+    {
+        "endpoint": "/api/",
+        "method": "GET",
+        "description": "get list of all supported APIs",
+        "contentType": "application/json"
+    }
+  ]
 
 /v1/api/user/ POST
 ------------------
@@ -131,3 +157,8 @@ Now that we have all the basic building buildings in place, lets explore each AP
 
 /v1/api/endpoint GET
 --------------------
+::
+
+  curl -X GET https://localhost:9000/v1/api/endpoint --header "Content-Type: application/json"
+  --header "x-auth-login: username" --header "x-auth-apikey: some-api-key"
+
