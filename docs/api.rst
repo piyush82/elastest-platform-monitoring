@@ -97,6 +97,7 @@ Now that we have all the basic building buildings in place, lets explore each AP
 /v1/api/user/ POST
 ------------------
 ::
+
   curl -X POST https://localhost:9000/v1/api/user/ --header "Content-type: application/json" 
   --header "x-auth-token: <admin-token>" -d '{"login":"username", "password":"some-password"}'
 
