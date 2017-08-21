@@ -33,6 +33,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -68,6 +69,54 @@ public class APIControllerTest
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+        ;
+    }
+
+    @Test
+    public void getUserData() throws Exception {
+        mockMvc.perform(get("/v1/api/user/1").accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+        ;
+    }
+
+    @Test
+    public void createUserTest() throws Exception {
+        mockMvc.perform(post("/v1/api/user/").accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+        ;
+    }
+
+    @Test
+    public void getUserKeyData() throws Exception {
+        mockMvc.perform(get("/v1/api/key/1").accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+        ;
+    }
+
+    @Test
+    public void createSpaceTest() throws Exception {
+        mockMvc.perform(post("/v1/api/space/").accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+        ;
+    }
+
+    @Test
+    public void createSeriesrTest() throws Exception {
+        mockMvc.perform(post("/v1/api/series/").accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+        ;
+    }
+
+    @Test
+    public void getAPIEndpoint() throws Exception {
+        mockMvc.perform(get("/v1/api/endpoint").accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
         ;
     }
 

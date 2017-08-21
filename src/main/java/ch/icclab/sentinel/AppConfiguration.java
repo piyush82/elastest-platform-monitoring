@@ -96,57 +96,91 @@ public class AppConfiguration {
 
     public static String getStreamDBUser()
     {
+        Map<String, String> env = System.getenv();
+        if(env.containsKey("STREAM_ADMINUSER"))
+            streamDBUser = env.get("STREAM_ADMINUSER");
+
         return streamDBUser;
     }
 
     public static String getStreamDBPass()
     {
+        Map<String, String> env = System.getenv();
+        if(env.containsKey("STREAM_ADMINPASS"))
+            streamDBPass = env.get("STREAM_ADMINPASS");
         return streamDBPass;
     }
 
     public static String getStreamDBType()
     {
+        Map<String, String> env = System.getenv();
+        if(env.containsKey("STREAM_DBTYPE"))
+            streamDBType = env.get("STREAM_DBTYPE");
         return streamDBType;
     }
 
     public static String getStreamDBURL()
     {
+        Map<String, String> env = System.getenv();
+        if(env.containsKey("STREAM_DBENDPOINT"))
+            streamDBURL = env.get("STREAM_DBENDPOINT");
         return streamDBURL;
     }
 
     public static String getStreamAccessUrl()
     {
+        Map<String, String> env = System.getenv();
+        if(env.containsKey("STREAM_ACCESSURL"))
+            streamAccessUrl = env.get("STREAM_ACCESSURL");
         return streamAccessUrl;
     }
 
     public static String getSentinelDBType()
     {
+        Map<String, String> env = System.getenv();
+        if(env.containsKey("SENTINEL_DB_TYPE"))
+            sentinelDBType = env.get("SENTINEL_DB_TYPE");
         return sentinelDBType;
     }
 
     public static String getSentinelDBURL()
     {
+        Map<String, String> env = System.getenv();
+        if(env.containsKey("SENTINEL_DB_ENDPOINT"))
+            sentinelDBURL = env.get("SENTINEL_DB_ENDPOINT");
         return sentinelDBURL;
     }
 
     public static String getKafkaURL()
     {
+        Map<String, String> env = System.getenv();
+        if(env.containsKey("KAFKA_ENDPOINT"))
+            KafkaURL = env.get("KAFKA_ENDPOINT");
         logger.info("returning kafka endpoint as: " + KafkaURL);
         return KafkaURL;
     }
 
     public static String getZookeeperURL()
     {
+        Map<String, String> env = System.getenv();
+        if(env.containsKey("ZOOKEEPER_ENDPOINT"))
+            ZookeeperURL = env.get("ZOOKEEPER_ENDPOINT");
         return ZookeeperURL;
     }
 
     public static long getTopicCheckWaitingPeriod()
     {
+        Map<String, String> env = System.getenv();
+        if(env.containsKey("TOPIC_CHECK_INTERVAL"))
+            topicCheckWaitingPeriod = Long.parseLong(env.get("TOPIC_CHECK_INTERVAL"));
         return topicCheckWaitingPeriod;
     }
 
     public static String getAdminToken()
     {
+        Map<String, String> env = System.getenv();
+        if(env.containsKey("ADMIN_TOKEN"))
+            adminToken = env.get("ADMIN_TOKEN");
         return adminToken;
     }
 

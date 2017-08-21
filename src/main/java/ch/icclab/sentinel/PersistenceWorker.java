@@ -50,6 +50,7 @@ public class PersistenceWorker implements Runnable
         {
             //get series format from DB entry for the
             logger.info(Thread.currentThread().getName() + " got: [Topic=" + topic + ", Offset=" + msgOffset + ", Key=" + key + ", Value=" + value + "]");
+            //do not allow data from test user into the tsdb backend
             if(AppConfiguration.getStreamDBType().equalsIgnoreCase("influxdb"))
                 InfluxDBClient.addPoint(topic, key, value);
             //Thread.sleep(5000);
