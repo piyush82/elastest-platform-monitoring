@@ -50,6 +50,8 @@ public class APIOfflineTest {
         assertEquals("status code", 409, response.getStatusCodeValue());
         response = apiController.createUser("{\"login\":\"username1\", \"password\":\"some-password\"}", "somewrongtoken");
         assertEquals("status code", 401, response.getStatusCodeValue());
+        response = apiController.createUser(null, "somewrongtoken");
+        assertEquals("status code", 401, response.getStatusCodeValue());
     }
 
     @Test
@@ -68,6 +70,8 @@ public class APIOfflineTest {
         apiController = new APIController();
         ResponseEntity response = apiController.locateUserKey("test", "testuser");
         assertEquals("status code", 200, response.getStatusCodeValue());
+        response = apiController.locateUserKey("test1", "testuser");
+        assertEquals("status code", 401, response.getStatusCodeValue());
         response = apiController.locateUserKey("test", "someelse");
         assertEquals("status code", 400, response.getStatusCodeValue());
     }
@@ -82,6 +86,8 @@ public class APIOfflineTest {
         assertEquals("status code", 201, response.getStatusCodeValue());
         response = apiController.createSpace("{\"name\":\"space-name\"}", "testuser", "7ddbba60-8667-11e7-bb31-be2e44b06b34");
         assertEquals("status code", 409, response.getStatusCodeValue());
+        response = apiController.createSpace("{\"name\":\"space-name\"}", "testuser", "7ddbba60-8667-11e7-bb31-be2e44b06b35");
+        assertEquals("status code", 401, response.getStatusCodeValue());
     }
 
     @Test

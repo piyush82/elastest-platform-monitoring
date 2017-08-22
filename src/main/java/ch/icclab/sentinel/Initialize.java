@@ -84,17 +84,14 @@ public class Initialize {
 
     static boolean initializeTestDb()
     {
+        boolean status = initializeDb();
+
+        if(!status) return false;
+
         Connection con = SqlDriver.getDBConnection();
         try {
             Statement statement = con.createStatement();
             statement.setQueryTimeout(30);  // set timeout to 30 sec.
-            for (int i=0; i < tables.length; i++)
-            {
-                statement.executeUpdate("drop table if exists " + tables[i]);
-                statement.executeUpdate(tableInitScripts.get(tables[i]));
-                logger.info("(Re)Created table: " + tables[i]);
-            }
-            logger.info("Database (re)initialized successfully!");
             statement.executeUpdate("INSERT INTO user " + "VALUES (1, 'testuser', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', '7ddbba60-8667-11e7-bb31-be2e44b06b34')");
             statement.executeUpdate("INSERT INTO space " + "VALUES (1, 'testspace', 'test', 'test', 1)");
             statement.executeUpdate("INSERT INTO series " + "VALUES (1, 'testseries', 'unixtime:s msgtype:json', 1)");
@@ -107,7 +104,7 @@ public class Initialize {
             logger.error("Exception caught while initializing sentinel sql database.");
             return false;
         }
-        return true;
+        return isDbValid();
     }
 
 }

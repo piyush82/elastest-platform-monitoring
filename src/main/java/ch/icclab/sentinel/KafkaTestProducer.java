@@ -30,7 +30,7 @@ public class KafkaTestProducer {
     final static Logger logger = Logger.getLogger(KafkaTestProducer.class);
 
     //change send to main if you wish to have this as a standalone sender application
-    public static void send(String[] args)
+    public static boolean send(String[] args)
     {
         Properties props = new Properties();
         props.put("bootstrap.servers", "kafka.demonstrator.info:9092");
@@ -48,6 +48,7 @@ public class KafkaTestProducer {
             producer.send(new ProducerRecord<String, String>("testing2", "udr", Integer.toString(i)), callback);
 
         producer.close();
+        return true;
     }
 
 

@@ -45,7 +45,13 @@ public class Application {
 
     public static void main (String[] args)
     {
-        SpringApplication.run(Application.class, args);
+        if(args!=null && args.length>0 && args[0].equalsIgnoreCase("--testrun=true"))
+        {
+            //test run do nothing
+        }
+        else {
+            SpringApplication.run(Application.class, args);
+        }
         //boolean status = KafkaClient.createTopic("zane-sensor-data");
         //System.out.println(status);
         //boolean status = KafkaClient.deleteTopic("testing5");
