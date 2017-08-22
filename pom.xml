@@ -140,6 +140,7 @@
         </dependency>
     </dependencies>
 
+
     <build>
         <plugins>
             <plugin>
@@ -152,6 +153,19 @@
                 <version>2.19</version>
                 <configuration>
                     <argLine>-Xmx1024m</argLine>
+                    <environmentVariables>
+                        <STREAM_ADMINUSER>testroot</STREAM_ADMINUSER>
+                        <STREAM_ADMINPASS>testpass</STREAM_ADMINPASS>
+                        <STREAM_ACCESSURL>localhost:8083</STREAM_ACCESSURL>
+                        <KAFKA_ENDPOINT>kafka.demonstrator.info:9092</KAFKA_ENDPOINT>
+                        <ZOOKEEPER_ENDPOINT>kafka.demonstrator.info:2181</ZOOKEEPER_ENDPOINT>
+                        <STREAM_DBTYPE>influxdb</STREAM_DBTYPE>
+                        <STREAM_DBENDPOINT>localhost:8086</STREAM_DBENDPOINT>
+                        <SENTINEL_DB_TYPE>sqlite</SENTINEL_DB_TYPE>
+                        <SENTINEL_DB_ENDPOINT>test.db</SENTINEL_DB_ENDPOINT>
+                        <TOPIC_CHECK_INTERVAL>30000</TOPIC_CHECK_INTERVAL>
+                        <ADMIN_TOKEN>sometoken</ADMIN_TOKEN>
+                    </environmentVariables>
                 </configuration>
             </plugin>
             <plugin>
@@ -187,7 +201,42 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <formats>
+                        <format>xml</format>
+                    </formats>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>cobertura</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <check></check>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
