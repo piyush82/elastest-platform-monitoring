@@ -18,6 +18,7 @@ package ch.icclab.sentinel;/*
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /*
  *     Author: Piyush Harsh,
@@ -88,5 +89,13 @@ public class AppConfigurationTest {
     public void testgetAdminToken()
     {
         assertEquals("get admin token value", "sometoken", AppConfiguration.getAdminToken());
+    }
+
+    @Test
+    public void testinit()
+    {
+        AppConfiguration conf = new AppConfiguration();
+        conf.init();
+        assertNull("get kafka serializer value", AppConfiguration.getKafkaKeySerializer());
     }
 }

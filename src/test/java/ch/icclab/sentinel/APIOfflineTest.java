@@ -18,7 +18,7 @@ package ch.icclab.sentinel;/*
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 import static org.junit.Assert.assertEquals;
-
+import org.springframework.http.HttpStatus;
 /*
  *     Author: Piyush Harsh,
  *     URL: piyush-harsh.info
@@ -92,6 +92,8 @@ public class APIOfflineTest {
         assertEquals("status code", 400, response.getStatusCodeValue());
         response = apiController.createSeries("{\"name\":\"series-name\", \"spaceName\":\"parent-space-name\", \"msgSignature\":\"msg-signature\"}", "testuser", "7ddbba60-8667-11e7-bb31-be2e44b06b34");
         assertEquals("status code", 400, response.getStatusCodeValue());
+        response = apiController.createSeries("{\"name\":\"series-name\", \"spaceName\":\"testspace\", \"msgSignature\":\"msg-signature\"}", "testuser", "7ddbba60-8667-11e7-bb31-be2e44b06b35");
+        assertEquals("status code", 401, response.getStatusCodeValue());
         response = apiController.createSeries("{\"name\":\"series-name\", \"spaceName\":\"testspace\", \"msgSignature\":\"msg-signature\"}", "testuser", "7ddbba60-8667-11e7-bb31-be2e44b06b34");
         assertEquals("status code", 201, response.getStatusCodeValue());
         response = apiController.createSeries("{\"name\":\"series-name\", \"spaceName\":\"testspace\", \"msgSignature\":\"msg-signature\"}", "testuser", "7ddbba60-8667-11e7-bb31-be2e44b06b34");
@@ -108,5 +110,12 @@ public class APIOfflineTest {
         assertEquals("status code", 200, response.getStatusCodeValue());
         response = apiController.getEndpointInfo("test-user4", "7ddbba60-8667-11e7-bb31-be2e44b06b34");
         assertEquals("status code", 401, response.getStatusCodeValue());
+    }
+
+    @Test
+    public void testreturnError() {
+        apiController = new APIController();
+        ResponseEntity response = apiController.returnError();
+        assertEquals("status code", 501, response.getStatusCodeValue());
     }
 }
