@@ -162,7 +162,7 @@
                         <STREAM_DBTYPE>influxdb</STREAM_DBTYPE>
                         <STREAM_DBENDPOINT>localhost:8086</STREAM_DBENDPOINT>
                         <SENTINEL_DB_TYPE>sqlite</SENTINEL_DB_TYPE>
-                        <SENTINEL_DB_ENDPOINT>test.db</SENTINEL_DB_ENDPOINT>
+                        <SENTINEL_DB_ENDPOINT>/tmp/test.db</SENTINEL_DB_ENDPOINT>
                         <TOPIC_CHECK_INTERVAL>30000</TOPIC_CHECK_INTERVAL>
                         <ADMIN_TOKEN>sometoken</ADMIN_TOKEN>
                     </environmentVariables>
@@ -205,14 +205,9 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.7</version>
-                <configuration>
-                    <formats>
-                        <format>xml</format>
-                    </formats>
-                </configuration>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>cobertura</goal>
                         </goals>

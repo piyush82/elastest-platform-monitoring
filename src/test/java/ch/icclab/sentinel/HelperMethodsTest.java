@@ -29,12 +29,15 @@ public class HelperMethodsTest
     {
         assertEquals("generates hash for 'test'", "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
                 HelperMethods.generateSHA256Hash("test"));
+        assertNotEquals("generates hash for 'test'", "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a18",
+                HelperMethods.generateSHA256Hash("test"));
     }
 
     @Test
     public void testJsonValidator()
     {
         assertTrue(HelperMethods.isJSONValid("{\"username\":\"piyush\"}"));
+        assertFalse(HelperMethods.isJSONValid("{\"username\":\"piyush\",}"));
     }
 
     @Test

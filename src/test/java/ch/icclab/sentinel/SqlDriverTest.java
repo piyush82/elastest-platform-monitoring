@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /*
  *     Author: Piyush Harsh,
@@ -79,5 +80,76 @@ public class SqlDriverTest
     {
         setUp();
         Assert.isTrue(SqlDriver.isValidPassword(1, "test"), "testing for password verification");
+    }
+
+    @Test
+    public void testisDuplicateSpace()
+    {
+        setUp();
+        Assert.isTrue(SqlDriver.isDuplicateSpace("testuser", "testspace"), "testing for duplicate space");
+    }
+
+    @Test
+    public void testisDuplicateSeries()
+    {
+        setUp();
+        Assert.isTrue(SqlDriver.isDuplicateSeries("testuser", "testseries", "testspace"), "testing for duplicate series");
+    }
+
+    @Test
+    public void testaddSpace()
+    {
+        setUp();
+        assertNotEquals("add a new space", -1, SqlDriver.addSpace("testuser", "somespace", "somequeryuser", "blah-blah"));
+    }
+
+    @Test
+    public void testaddSeries()
+    {
+        setUp();
+        assertNotEquals("add a new series", -1, SqlDriver.addSeries("newseries", "unixtime:s msgtype:json", 1));
+    }
+
+    @Test
+    public void testaddUser()
+    {
+        setUp();
+        assertNotEquals("add a new user", -1, SqlDriver.addUser("newuser", "somepassword", "some-key"));
+    }
+
+    @Test
+    public void testgetUserId()
+    {
+        setUp();
+        assertEquals("get user id", 1, SqlDriver.getUserId("testuser"));
+    }
+
+    @Test
+    public void testgetSpaceId()
+    {
+        setUp();
+        assertEquals("get space id", 1, SqlDriver.getSpaceId("testuser", "testspace"));
+        assertEquals("get space id", 1, SqlDriver.getSpaceId(1, "testspace"));
+    }
+
+    @Test
+    public void testgetSeriesId()
+    {
+        setUp();
+        assertEquals("get series id", 1, SqlDriver.getSeriesId("testseries", 1));
+    }
+
+    @Test
+    public void testgetSeriesMsgFormat()
+    {
+        setUp();
+        assertEquals("get series msg format id", "unixtime:s msgtype:json", SqlDriver.getSeriesMsgFormat("testseries", 1));
+    }
+
+    @Test
+    public void testgetGlobalTopicsList()
+    {
+        setUp();
+        assertEquals("list of spaces", 1, SqlDriver.getGlobalTopicsList().size());
     }
 }

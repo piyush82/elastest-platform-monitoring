@@ -63,7 +63,7 @@ public class AppConfigurationTest {
     @Test
     public void testgetSentinelDBURL()
     {
-        assertEquals("get sentinel db url value", "test.db", AppConfiguration.getSentinelDBURL());
+        assertEquals("get sentinel db url value", "/tmp/test.db", AppConfiguration.getSentinelDBURL());
     }
 
     @Test
